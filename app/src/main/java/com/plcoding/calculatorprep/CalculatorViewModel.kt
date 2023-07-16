@@ -60,10 +60,15 @@ class CalculatorViewModel: ViewModel() {
     }
 
     private fun enterDecimal() {
-        if(state.operation == null && !state.number1.contains(".") && state.number1.isNotBlank()) {
-            state = state.copy(
-                number1 = state.number1 + "."
-            )
+        if(state.operation == null && !state.number1.contains(".")) {
+            state = if(state.number1.isNotBlank()){
+                state.copy(
+                    number1 = state.number1 + "."
+                )
+            } else{
+                state.copy(
+                    number1 = state.number1 + "0.")
+            }
             return
         } else if(!state.number2.contains(".") && state.number2.isNotBlank()) {
             state = state.copy(
